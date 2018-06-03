@@ -1,0 +1,8 @@
+---
+
+- name: Install apt-cache-ng
+  hosts: cachers
+  become: yes
+  roles:
+    - ansible-apt-cacher-ng
+
