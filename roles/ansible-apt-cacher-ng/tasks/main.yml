@@ -1,0 +1,31 @@
+---
+
+- name: install python 2
+  gather_facts: no
+  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+  
+- name: Install Apt-cacher-ng
+  apt: 
+    name: apt-cacher-ng
+    state: present
+    update_cache: yes
+
+- name: Copying configs
+  copy:
+    src: acng.conf
+    dest: /etc/apt-cacher-ng/acng.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: update and upgrade
+  become: true
+  apt:
+    update_cache: yes
+    upgrade: yes 
+
+- name: Restarting services
+  service:
+    name: apt-cacher-ng
+    state: restarted
