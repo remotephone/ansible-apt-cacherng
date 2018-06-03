@@ -1,9 +1,7 @@
 ---
 
-- name: install python 2
-  gather_facts: no
-  raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
-
+- name: Gathering facts
+  setup:
   
 - name: Install Apt-cacher-ng
   apt: 
