@@ -1,5 +1,12 @@
 ---
 
+
+- name: Bootstrap it
+  hosts: cachers:
+  gather_facts: no
+  roles:
+    - bootstrap
+    
 - name: Install apt-cache-ng
   hosts: cachers
   become: yes
