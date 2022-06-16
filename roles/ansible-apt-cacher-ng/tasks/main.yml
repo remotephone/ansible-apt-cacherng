@@ -1,5 +1,4 @@
 ---
-
 - name: Gathering facts
   setup:
   
@@ -8,6 +7,11 @@
     name: apt-cacher-ng
     state: present
     update_cache: yes
+
+- name: Enable systemd service
+  ansible.builtin.systemd:
+    name: apt-cacher-ng
+    enabled: yes
 
 - name: Copying configs
   copy:
@@ -23,7 +27,7 @@
     update_cache: yes
     upgrade: yes 
 
-- name: Restarting services
-  service:
+- name: Reloading services
+  ansible.builtin.systemd:
     name: apt-cacher-ng
-    state: restarted
+    state: reloaded
